@@ -1,0 +1,19 @@
+.background-container {
+    position: relative;
+    background-image: url('https://i.pinimg.com/736x/94/93/1b/94931b132fa1c3e4d339ba151857d76a.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh; /* Ajusta la altura según sea necesario */
+    opacity: 0.5; /* Ajusta la opacidad según sea necesario */
+}
+
+.watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 36px;
+    font-weight: bold;
+}
