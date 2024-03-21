@@ -22,6 +22,30 @@
       </table>
     </div>
 
+    <h1 class="genero" style="text-align: center;">Libros por fecha de publicación</h1>
+
+    <div v-for="(librosPorFecha, fecha_publicacion) in librosPorFecha" :key="fecha_publicacion" class="fecha_publicacion">
+      <h2>{{ fecha_publicacion }}</h2>
+      <table>
+        <thead>
+          <tr>
+            <th class="titulo-columna">Título</th>
+            <th class="autor-columna">Autor</th>
+            <th class="fecha-columna">Fecha de publicación</th>
+            <th class="fecha-columna">Género</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="libro in librosPorFecha" :key="libro.id">
+            <td class="titulo-columna">{{ libro.titulo }}</td>
+            <td class="autor-columna">{{ libro.autor }}</td>
+            <td class="fecha-columna">{{ libro.fecha_publicacion }}</td>
+            <td class="genero-columna">{{ libro.genero }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
   </div>
 </template>
 
@@ -44,6 +68,16 @@ export default {
         librosPorGenero[libro.genero].push(libro);
       });
       return librosPorGenero;
+    },
+    librosPorFecha() {
+      const librosPorFecha = {};
+      this.libros.forEach(libro => {
+        if (!librosPorFecha[libro.fecha_publicacion]) {
+          librosPorFecha[libro.fecha_publicacion] = [];
+        }
+        librosPorFecha[libro.fecha_publicacion].push(libro);
+      });
+      return librosPorFecha;
     }
   },
   methods: {
@@ -108,6 +142,14 @@ th.fecha-columna {
 }
 
 .genero {
+  margin-bottom: 20px;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.fecha_publicacion {
   margin-bottom: 20px;
   border-radius: 10px;
   background-color: rgba(0, 0, 0, 0.5);

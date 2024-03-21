@@ -85,6 +85,26 @@ class LibroWebController extends Controller
         return redirect('/libros')->with('success', 'Libro actualizado correctamente');
     }
 
+    public function filtrar(Request $request, $id)
+    {
+        $genero = $request->input('genero');
+        $fecha_publicacion = $request->input('fecha_publicacion');
+
+        $query = Libro::query();
+
+        if ($genero) {
+            $query->where('genero', $genero);
+        }
+
+        if ($fecha_publicacion) {
+            $query->where('fecha_publicacion', $fecha_publicacion);
+        }
+
+        $libro = $query->get();
+        
+        return view('registros.index', compact('registros'));
+    }
+
     public function destroy($id)
     {
         $libro = Libro::findOrFail($id);
