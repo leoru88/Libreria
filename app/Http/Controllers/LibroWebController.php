@@ -85,26 +85,28 @@ class LibroWebController extends Controller
         return redirect('/libros')->with('success', 'Libro actualizado correctamente');
     }
 
-    public function filtrar(Request $request, $id)
+    public function ApifiltrarPorGenero($genero)
     {
-        $genero = $request->input('genero');
-        $fecha_publicacion = $request->input('fecha_publicacion');
-
-        $query = Libro::query();
-
-        if ($genero) {
-            $query->where('genero', $genero);
+        $libros = Libro::where('genero', $genero)->get();
+    
+        if (request()->wantsJson()) {
+            return response()->json($libros, 200);
         }
-
-        if ($fecha_publicacion) {
-            $query->where('fecha_publicacion', $fecha_publicacion);
-        }
-
-        $libro = $query->get();
-        
-        return view('registros.index', compact('registros'));
+    
+        return view('libros.index', compact('libros'));
     }
-
+    
+    public function ApifiltrarPorFecha($fecha)
+    {
+        $libros = Libro::whereDate('fecha_publicacion', $fecha)->get();
+    
+        if (request()->wantsJson()) {
+            return response()->json($libros);
+        }
+    
+        return view('libros.index', compact('libros'));
+    }
+    
     public function destroy($id)
     {
         $libro = Libro::findOrFail($id);

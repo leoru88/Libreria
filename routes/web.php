@@ -9,6 +9,9 @@ Route::get('/autores/{id}/edit', [AutorController::class, 'edit']);
 Route::put('/autores/{id}', [AutorController::class, 'update']);
 Route::delete('/autores/{id}', [AutorController::class, 'destroy']);
 
+Route::get('/api/libros/filtrar-por-genero/{genero}', [LibroWebController::class, 'ApifiltrarPorGenero']);
+Route::get('/api/libros/filtrar-por-fecha/{fecha}', [LibroWebController::class, 'ApifiltrarPorFecha']);
+
 Route::get('/libros', [LibroWebController::class, 'index']);
 Route::get('libros/Organize', [LibroWebController::class, 'Organize']);
 Route::get('/ultima-actualizacion', [LibroWebController::class, 'obtenerUltimaActualizacion']);
